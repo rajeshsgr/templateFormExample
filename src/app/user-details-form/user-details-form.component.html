@@ -1,0 +1,132 @@
+<div class="container">
+
+    <form class="form-horizontal simple-validation" (ngSubmit)="onSubmit()" #f="ngForm">
+
+        <div class="form-group">
+
+            <label for="name" class="col-sm-2 control-label">Name</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" minlength="4" ngModel name="name" id="name"
+                    placeholder="Enter your name" #name="ngModel">
+
+                <span class="label label-danger"
+                    *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.minlength">
+                    Name must be at least 4 characters long
+                </span>
+
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="name" class="col-sm-2 control-label">Age</label>
+
+            <div class="col-sm-10">
+                <input type="number" class="form-control" ngModel name="age" id="age" placeholder="Enter your age"
+                    #age="ngModel">
+            </div>
+
+            <span class="label label-danger" *ngIf="age.invalid && (age.dirty || age.touched) && name.errors.required">
+                Age is required
+
+            </span>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="name" class="col-sm-2 control-label">Gender</label>
+
+            <div class="col-sm-10">
+                <div class="radio" *ngFor="let gender of genders">
+
+                    <label>
+                        <input type="radio" name="gender" ngModel [value]="gender" required> {{ gender }}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group ">
+
+            <label for="name" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-10">
+
+                <input type="email" id="email" class="form-control" ngModel name="email" pattern="^\S*[@]\S*[.]\S*$"
+                    email required #email="ngModel" />
+
+                <span class="label label-danger" *ngIf="!email.valid && email.touched">Please enter a valid
+                    email!</span>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="name" class="col-sm-2 control-label">Subscribe to</label>
+
+            <div class="col-sm-10">
+
+                <select id="interest" class="form-control" [ngModel]="interest" name="interest">
+                    <option *ngFor="let interest of interests">{{interest.name}}</option>
+                </select>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="name" class="col-sm-2 control-label">Reason</label>
+
+            <div class="col-sm-10">
+
+                <textarea id="reason" name="description" rows="3" class="form-control" ngModel name="reason"
+                    minlength="10" placeholder="Why do you want to join this group?" #reason="ngModel"></textarea>
+
+                <span class="label label-danger"
+                    *ngIf="reason.invalid && (reason.dirty || reason.touched) && reason.errors.minlength">
+                    Minimum 10 charcters
+                </span>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-12 text-center">
+
+            <button id="singlebutton" type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary" (click)="resetForm()">Reset</button>
+        </div>
+
+
+    </form>
+
+    <hr>
+    
+    <div class="row" *ngIf="submitted">
+
+            <div class="col-xs-4"></div>
+        <div class="col-xs-8">
+            <h3>Information Entered</h3>
+            <p>Username: {{ user.name }}</p>
+            <p>Age: {{ user.age }}</p>
+            <p>Gender: {{ user.gender }}</p>
+            <p>Mail: {{ user.email }}</p>
+            <p>Interest Area: {{ user.subscription }}</p>
+            <p>Reason: {{ user.reason }}</p>
+            
+        </div>
+    </div>
+
+</div>
